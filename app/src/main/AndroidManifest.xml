@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.techbook"
+    android:installLocation="preferExternal">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".books.Python"></activity>
+        <activity android:name=".books.PHP" />
+        <activity android:name=".books.CompilerDesign" />
+        <activity android:name=".books.Ecommerce" />
+        <activity android:name=".books.Cryptography" />
+        <activity android:name=".books.DesignAndAnalysisOfAlgorithm" />
+        <activity android:name=".books.WebTechnology" />
+        <activity android:name=".books.DBMS" />
+        <activity android:name=".books.ArtificialIntelligence" />
+        <activity android:name=".books.SAD" />
+        <activity android:name=".books.ComputerGraphics" />
+        <activity android:name=".books.CloudComputing" />
+        <activity android:name=".books.AndroidProgramming" />
+        <activity android:name=".books.JavaProgramming" />
+        <activity android:name=".books.DSA" />
+        <activity android:name=".books.MicroProcessor" />
+        <activity android:name=".books.DiscreteStructure" />
+        <activity android:name=".books.Cpp" />
+        <activity android:name=".books.InformationTechnology" />
+        <activity android:name=".books.DigitalLogic" />
+        <activity android:name=".books.ComputerNetwork" />
+        <activity android:name=".books.OperatingSystem" />
+        <activity android:name=".books.ComputerArchitecture" />
+        <activity android:name=".books.Cprogramming" />
+        <activity android:name=".books.ComputerFundamental" />
+        <activity android:name=".Answers" />
+        <activity android:name=".AskQuestion" />
+        <activity android:name=".DashBoardActivity" />
+        <activity android:name=".Register" />
+        <activity android:name=".Login" />
+        <activity android:name=".Welcome" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

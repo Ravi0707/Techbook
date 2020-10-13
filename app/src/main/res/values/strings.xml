@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Techbook</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">profile</string>
+    <string name="name">Name</string>
+    <string name="asked_by">Asked by-</string>
+    <string name="Text">TextView</string>
+    <string name="topic">Topic:-</string>
+    <string name="how_are_you">How are you?</string>
+    <string name="see_answer">See Answer</string>
+    <string name="uploaded_by">Uploaded by-</string>
+    <string name="download">Download</string>
+    <string name="pdf_name">Pdf name</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="s_i">S.I</string>
+    <string name="prev_questions">Prev. Questions</string>
+    <string name="logout">Logout</string>
+    <string name="notes">Notes</string>
+    <string name="home">Home</string>
+</resources>

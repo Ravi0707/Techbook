@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_1"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Computer Fundamental"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_2"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="C Programming"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_3"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Computer Architecture"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_4"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Operating System"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_5"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_4"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Computer Network"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_6"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Digital Logic"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_7"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_6"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Introduction To Information Technology"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_8"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_7"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="C++ (Object Oriented Programming)"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_9"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_8"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Discrete Structure"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_10"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_9"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Microprocessor"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button_11"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_10"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Data Structures and Algorithms"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_12"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_11"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Computer Graphics"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_13"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_12"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Artificial Intelligence"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_14"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_13"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Database Management System"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_15"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_14"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="System Analysis and Design"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_16"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_15"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Web Technology"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_17"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_16"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Design and Analysis of Algorithm"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_18"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_17"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Cryptography"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_19"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_18"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Android Programming"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_20"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_19"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Java Programming"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_21"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_20"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Compiler Design"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_22"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_21"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="E-Commerce"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_23"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_22"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Cloud Computing"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_24"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_23"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="PHP"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_25"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/button_24"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_book_button"
+            android:text="Python"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>

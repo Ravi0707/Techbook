@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "330854220421",
+    "firebase_url": "https://techbook-4856e.firebaseio.com",
+    "project_id": "techbook-4856e",
+    "storage_bucket": "techbook-4856e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330854220421:android:fad0500d10aba6116e9fec",
+        "android_client_info": {
+          "package_name": "com.example.i_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330854220421-lvc5okki2luqeuq7s263n8rs4tl6q5n9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.i_app",
+            "certificate_hash": "a00f0222dba001ad51547da18bc151b52fd95f1d"
+          }
+        },
+        {
+          "client_id": "330854220421-lnj09lp474p4eie71bp1bjm5vl63iji6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn4914cabsXYTumIeRke78Z3W2QOMdIF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330854220421-lnj09lp474p4eie71bp1bjm5vl63iji6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

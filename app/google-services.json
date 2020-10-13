@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "796929842679",
+    "firebase_url": "https://techbook-6fc00.firebaseio.com",
+    "project_id": "techbook-6fc00",
+    "storage_bucket": "techbook-6fc00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796929842679:android:db96e4f5db32aaeca562f2",
+        "android_client_info": {
+          "package_name": "com.example.techbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796929842679-lgvqk5g5k1ho1knfbj38u14dg5emf3pn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbDClHej05gxuWPDi6n4GjwTIqcMn2fLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796929842679-lgvqk5g5k1ho1knfbj38u14dg5emf3pn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
