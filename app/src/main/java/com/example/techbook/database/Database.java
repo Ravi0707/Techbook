@@ -2,13 +2,12 @@ package com.example.techbook.database;
 
 import android.net.Uri;
 import android.util.Log;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.example.techbook.data.CurrentUser;
 import com.example.techbook.data.CurrentUserInfoHolder;
-import com.example.techbook.data.Result;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +28,6 @@ public class Database {
     private final FirebaseFirestore firestoreDB;
     private final StorageReference storage;
     private final String currentUserId;
-    public Result upload_result = new Result(false);
     private final CurrentUser user = CurrentUserInfoHolder.getInstance().getItem();
 
     public Database() {
@@ -72,25 +69,6 @@ public class Database {
         return firestoreDB.collection("users").document(currentUserId);
     }
 
-    public void uploadProfilePic(Uri imageUri) {
-        StorageReference file = storage.child("users/" + currentUserId + "/profile.jpg");
-
-        file.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d("image upload", "Successful");
-
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("image upload", "Failed");
-            }
-        });
-
-    }
-
     public Task<Void> uploadQuestion(String question, String title) {
         DocumentReference questionDocument = firestoreDB.collection("Questions").document(question);
         HashMap<String, String> file = new HashMap<>();
@@ -118,18 +96,21 @@ public class Database {
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                Log.d("PROFILE", "success" + uri.toString());
                 imageUri[0] = uri;
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("set profile", e.getLocalizedMessage());
+                Log.d("PROFILE", Objects.requireNonNull(e.getLocalizedMessage()));
             }
-        });
+        })
+                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        Log.d("PROFILE", "success" + task.getResult().getPath());
+                    }
+                });
         return imageUri[0];
-    }
-
-    public void setProfilePic(ImageView profileImage) {
-
     }
 }

@@ -38,4 +38,6 @@
     <string name="answer">Answer</string>
     <string name="book_name">name</string>
     <string name="write_your_answer_here">Write your answer here</string>
+    <string name="username">USERNAME</string>
+    <string name="email">EMAIL</string>
 </resources>

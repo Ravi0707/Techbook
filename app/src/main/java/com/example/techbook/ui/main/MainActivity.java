@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void getUserData() {
         final Uri imageUri = database.getProfilePictureUrl();
+        Log.d("IMAGE", imageUri.toString());
         DocumentReference docRef = database.getUserData();
 
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -100,6 +103,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.getHeaderView(0).findViewById(R.id.headerImageView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.navProfile);
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
 
     }
 
