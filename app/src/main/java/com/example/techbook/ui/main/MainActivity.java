@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void getUserData() {
-        final Uri imageUri = database.getProfilePictureUrl();
-        DocumentReference docRef = database.getUserData();
+        final Uri[] imageUri = new Uri[1];
+        final DocumentReference docRef = database.getUserData();
 
         try {
             docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -77,10 +77,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (documentSnapshot != null) {
                         String name = documentSnapshot.getString("Name");
                         String email = documentSnapshot.getString("Email");
-                        CurrentUserInfoHolder.getInstance().setItem(new CurrentUser(name, imageUri, email, user.getUid()));
+                        String imageString = documentSnapshot.getString("Image");
+                        if (imageString != null) {
+                            imageUri[0] = Uri.parse(imageString);
+                        } else imageUri[0] = null;
+                        CurrentUserInfoHolder.getInstance().setItem(new CurrentUser(name, imageUri[0], email, user.getUid()));
+
                         profileName.setText(name);
                         profileEmail.setText(email);
-                        Picasso.get().load(imageUri).placeholder(R.drawable.ic_user).into(profileImage);
+                        Picasso.get().load(imageUri[0]).placeholder(R.drawable.ic_user).into(profileImage);
                     }
                 }
             });

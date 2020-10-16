@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,14 @@ import androidx.fragment.app.Fragment;
 import com.example.techbook.R;
 import com.example.techbook.data.CurrentUser;
 import com.example.techbook.data.CurrentUserInfoHolder;
+import com.example.techbook.database.Database;
 import com.example.techbook.ui.main.MainActivity;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -37,6 +43,7 @@ public class ProfileFragment extends Fragment {
     LinearLayout imageLayout;
     private StorageReference storage;
     private ProgressDialog progressDialog;
+    private Database database;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,34 +82,78 @@ public class ProfileFragment extends Fragment {
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1000) {
             if (resultCode == Activity.RESULT_OK) {
+
+                final String[] downloadUrl = new String[1];
                 progressDialog.show();
                 assert data != null;
                 Uri imageUri = data.getData();
 
-                StorageReference file = storage.child("users/" + Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid() + "/profile.jpg");
+                final StorageReference storageReference = storage.child("users/" + CurrentUserInfoHolder.getInstance().getItem().getuId() + "/profile.jpg");
 
-                file.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                UploadTask uploadTask = storageReference.putFile(imageUri);
+
+                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        progressDialog.dismiss();
-                        ((MainActivity) requireActivity()).getUserData();
-                        updateUserInfo();
-                        Toast.makeText(getContext(), "Profile picture updated", Toast.LENGTH_SHORT).show();
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw Objects.requireNonNull(task.getException());
+                        }
+                        // Continue with the task to get the download URL
+                        return storageReference.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            assert downloadUri != null;
+                            try {
+                                downloadUrl[0] = downloadUri.toString();
+                                database = new Database();
+                                DocumentReference userData = database.getUserData();
+                                userData.update("Image", downloadUrl[0]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        ((MainActivity) requireActivity()).getUserData();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                updateUserInfo();
+                                                progressDialog.dismiss();
+                                                Toast.makeText(requireContext(), "Successfully updated profile picture", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        }, 2000);
+                                          }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(requireContext(), "Failed updating profile picture", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } catch (Exception e) {
+                                progressDialog.dismiss();
+                                Log.e("IMAGE UPLOAD", Objects.requireNonNull(e.getMessage()));
+                            }
+
+                        } else {
+                            progressDialog.dismiss();
+                            Log.e("IMAGE UPLOAD", "Error getting image url");
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(getContext(), "Something went wrong" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), "Failed updating profile picture", Toast.LENGTH_SHORT).show();
                     }
-
                 });
-
             }
         }
     }
