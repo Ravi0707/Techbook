@@ -75,6 +75,7 @@ public class Database {
         file.put("title", title);
         file.put("question", question);
         file.put("Uploader", CurrentUserInfoHolder.getInstance().getItem().getUsername());
+        file.put("date", String.valueOf(System.currentTimeMillis()));
 
         return questionDocument.set(file);
     }

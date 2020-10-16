@@ -46,21 +46,16 @@ public class AnswersActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        ArrayList<ModelAnswer> answers = new ArrayList<>();
+                        answerDownModels.clear();
                         for (DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())) {
                             ModelAnswer modelAnswer = new ModelAnswer(
                                     documentSnapshot.getString("question"),
                                     documentSnapshot.getString("Uploader"),
                                     documentSnapshot.getString("answer")
                             );
-                            answers.add(modelAnswer);
+                            answerDownModels.add(modelAnswer);
                         }
-                        answerDownModels.clear();
-                        for (ModelAnswer answer : answers) {
-                            if (answer.getQuestion().contains(question)) {
-                                answerDownModels.add(answer);
-                            }
-                        }
+
                         Objects.requireNonNull(answerRecyclerView.getAdapter()).notifyDataSetChanged();
                         answerRecyclerView.setItemAnimator(new DefaultItemAnimator());
                     }

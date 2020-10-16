@@ -26,6 +26,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment implements QuestionsAdapter.AnswerClickListener {
@@ -63,10 +65,18 @@ public class HomeFragment extends Fragment implements QuestionsAdapter.AnswerCli
                                     documentSnapshot.getString("Uploader"),
                                     documentSnapshot.getString("question"),
                                     documentSnapshot.getString("title"),
-                                    documentSnapshot.getString("pTime")
+                                    documentSnapshot.getString("date")
                             );
                             questionDownModels.add(downModel);
                         }
+
+                        Collections.sort(questionDownModels, new Comparator<QuestionDownModel>() {
+                            @Override
+                            public int compare(QuestionDownModel o1, QuestionDownModel o2) {
+                                return o1.getTimestamp().compareTo(o2.getTimestamp());
+                            }
+                        });
+
 
                         Objects.requireNonNull(questionsRecyclerView.getAdapter()).notifyDataSetChanged();
                         questionsRecyclerView.setItemAnimator(new DefaultItemAnimator());
