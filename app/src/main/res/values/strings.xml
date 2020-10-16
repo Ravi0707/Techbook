@@ -30,4 +30,14 @@
     <string name="logout">Logout</string>
     <string name="notes">Notes</string>
     <string name="home">Home</string>
+    <string name="navigation_header">Navigation Header</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="rate_app">Rate App</string>
+    <string name="see_answers">See Answers</string>
+    <string name="answer">Answer</string>
+    <string name="book_name">name</string>
+    <string name="write_your_answer_here">Write your answer here</string>
+    <string name="username">USERNAME</string>
+    <string name="email">EMAIL</string>
 </resources>
