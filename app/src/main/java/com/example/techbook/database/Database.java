@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -80,14 +81,14 @@ public class Database {
         return questionDocument.set(file);
     }
 
-    public Task<Void> uploadAnswer(String question, String answer) {
-        DocumentReference quesRef = firestoreDB.collection("Questions").document(question);
+    public Task<DocumentReference> uploadAnswer(String question, String answer) {
+        CollectionReference quesRef = firestoreDB.collection("Answers");
         Map<String, Object> ans = new HashMap<>();
         ans.put("question", question);
         ans.put("answer", answer);
         ans.put("Uploader", user.getUsername());
 
-        return quesRef.update(ans);
+        return quesRef.add(ans);
     }
 
     public Uri getProfilePictureUrl() {

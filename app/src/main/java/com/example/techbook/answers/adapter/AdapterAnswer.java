@@ -1,5 +1,6 @@
 package com.example.techbook.answers.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class AdapterAnswer extends RecyclerView.Adapter<AdapterAnswer.AnswerView
 
     @Override
     public void onBindViewHolder(@NonNull final AnswerViewHolder holder, final int position) {
-
+        Log.d("SIZE", String.valueOf(answerList.size()));
         holder.answer_uploader.setText(answerList.get(position).getName());
         holder.exact_answer.setText(answerList.get(position).getAnswer());
     }

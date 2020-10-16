@@ -67,102 +67,98 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRegister();
+            }
+        });
     }
 
     public void onRegister() {
 
-        if (!isDataValid()) {
-            onFail();
-            return;
-        }
+        if (isDataValid()) {
+            btn_register.setEnabled(false);
 
-        btn_register.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(this,
-                R.style.Theme_AppCompat_Light_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account");
-        progressDialog.show();
+            final ProgressDialog progressDialog = new ProgressDialog(this,
+                    R.style.Theme_AppCompat_Light_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Creating Account");
+            progressDialog.show();
 
 
-        final String email = text_email.getText().toString().trim();
-        final String password = text_password.getText().toString().trim();
-        final String name = text_name.getText().toString();
+            final String email = text_email.getText().toString().trim();
+            final String password = text_password.getText().toString().trim();
+            final String name = text_name.getText().toString();
 
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Register Success.", Toast.LENGTH_SHORT).show();
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Registration Result", "createUserWithEmail:success");
-                            //Stores the Registered user Data
-                            progressDialog.setMessage("Signing In...");
-                            auth.signInWithEmailAndPassword(email, password)
-                                    .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d("result", "SignIn With Email Success");
-                                                progressDialog.dismiss();
-                                                FirebaseUser user = auth.getCurrentUser();
-                                                assert user != null;
-                                                new Database().registerUser(user.getUid(), name, email);
-                                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            } else {
-                                                Log.d("result", "SigninWithEmail: Failed");
-                                                Toast.makeText(RegisterActivity.this, "Invalid username or Password", Toast.LENGTH_SHORT).show();
-                                                progressDialog.dismiss();
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Register Success.", Toast.LENGTH_SHORT).show();
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("Registration Result", "createUserWithEmail:success");
+                                //Stores the Registered user Data
+                                progressDialog.setMessage("Signing In...");
+                                auth.signInWithEmailAndPassword(email, password)
+                                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d("result", "SignIn With Email Success");
+                                                    progressDialog.dismiss();
+                                                    FirebaseUser user = auth.getCurrentUser();
+                                                    assert user != null;
+                                                    new Database().registerUser(user.getUid(), name, email);
+                                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    btn_register.setEnabled(true);
+                                                    Log.d("result", "SigninWithEmail: Failed");
+                                                    Toast.makeText(RegisterActivity.this, "Invalid username or Password", Toast.LENGTH_SHORT).show();
+                                                    progressDialog.dismiss();
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
 
-                        } else {
-                            progressDialog.dismiss();
-                            // If sign in fails, display a message to the user.
-                            Log.w("Registration Result", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Register failed.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                progressDialog.dismiss();
+                                // If sign in fails, display a message to the user.
+                                btn_register.setEnabled(true);
+                                Log.w("Registration Result", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Register failed.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     public boolean isDataValid() {
 
-        boolean valid = true;
-
-        String name = text_name.getText().toString();
-        String email = text_email.getText().toString();
-        String password = text_password.getText().toString();
-        String confirmPassword = text_confirmPassword.getText().toString();
+        String name = text_name.getText().toString().trim();
+        String email = text_email.getText().toString().trim();
+        String password = text_password.getText().toString().trim();
+        String confirmPassword = text_confirmPassword.getText().toString().trim();
 
         if (name.isEmpty() || name.length() < 3) {
             text_name.setError("at least 3 characters");
-            valid = false;
-        } else text_name.setError(null);
-
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return false;
+        } else if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             text_email.setError("enter valid email address");
-            valid = false;
-        } else text_email.setError(null);
-
-        if (password.isEmpty() || password.length() < 5 || password.length() > 15 || !password.equals(confirmPassword)) {
+            return false;
+        } else if (password.isEmpty() || password.length() < 5 || password.length() > 15 || !password.equals(confirmPassword)) {
             if (!password.equals(confirmPassword)) {
                 text_password.setError("Password does not match");
-            } else text_password.setError("between 5 and 15 alphanumeric characters");
-            valid = false;
-        } else text_password.setError(null);
+            } else {
+                text_password.setError("between 5 and 15 alphanumeric characters");
+            }
+            return false;
 
-        return valid;
+        } else
+            return true;
     }
-
-    public void onFail() {
-        Toast.makeText(this, "Signup Failed", Toast.LENGTH_SHORT).show();
-        btn_register.setEnabled(true);
-    }
-
 }

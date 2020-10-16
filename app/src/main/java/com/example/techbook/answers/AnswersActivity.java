@@ -1,6 +1,7 @@
 package com.example.techbook.answers;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +42,7 @@ public class AnswersActivity extends AppCompatActivity {
 
         Database database = new Database();
 
-        database.getDb().collection("Questions").whereEqualTo("question", question)
+        database.getDb().collection("Answers").whereEqualTo("question", question)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
