@@ -51,6 +51,7 @@ public class Database {
         DocumentReference document = firestoreDB.collection("users").document(userId);
         Map<String, Object> users = new HashMap<>();
         users.put("Name", name);
+        users.put("Image", null);
         users.put("Email", email);
         document.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -89,30 +90,5 @@ public class Database {
         ans.put("Uploader", user.getUsername());
 
         return quesRef.add(ans);
-    }
-
-    public Uri getProfilePictureUrl() {
-        StorageReference profileRef = storage.child("users/" + currentUserId + "/profile.jpg");
-        final Uri[] imageUri = new Uri[1];
-
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Log.d("PROFILE", "success" + uri.toString());
-                imageUri[0] = uri;
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("PROFILE", Objects.requireNonNull(e.getMessage()));
-            }
-        })
-                .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Log.d("PROFILE", "success");
-                    }
-                });
-        return imageUri[0];
     }
 }
