@@ -103,13 +103,13 @@ public class Database {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("PROFILE", Objects.requireNonNull(e.getLocalizedMessage()));
+                Log.d("PROFILE", Objects.requireNonNull(e.getMessage()));
             }
         })
                 .addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        Log.d("PROFILE", "success" + task.getResult().getPath());
+                        Log.d("PROFILE", "success");
                     }
                 });
         return imageUri[0];
