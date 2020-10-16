@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -69,18 +70,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final Uri imageUri = database.getProfilePictureUrl();
         DocumentReference docRef = database.getUserData();
 
-        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                assert documentSnapshot != null;
-                String name = documentSnapshot.getString("Name");
-                String email = documentSnapshot.getString("Email");
-                CurrentUserInfoHolder.getInstance().setItem(new CurrentUser(name, imageUri, email, user.getUid()));
-                profileName.setText(name);
-                profileEmail.setText(email);
-                Picasso.get().load(imageUri).placeholder(R.drawable.ic_user).into(profileImage);
-            }
-        });
+        try {
+            docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    if (documentSnapshot != null) {
+                        String name = documentSnapshot.getString("Name");
+                        String email = documentSnapshot.getString("Email");
+                        CurrentUserInfoHolder.getInstance().setItem(new CurrentUser(name, imageUri, email, user.getUid()));
+                        profileName.setText(name);
+                        profileEmail.setText(email);
+                        Picasso.get().load(imageUri).placeholder(R.drawable.ic_user).into(profileImage);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Log.e("GET USER DATA", Objects.requireNonNull(e.getMessage()));
+        }
 
     }
 

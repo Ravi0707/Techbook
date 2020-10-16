@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         final String email = text_email.getText().toString().trim();
-        String password = text_password.getText().toString().trim();
+        final String password = text_password.getText().toString().trim();
         final String name = text_name.getText().toString();
 
         auth.createUserWithEmailAndPassword(email, password)
@@ -94,16 +94,33 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this, "Register Success.", Toast.LENGTH_SHORT).show();
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Registration Result", "createUserWithEmail:success");
-                            progressDialog.dismiss();
                             //Stores the Registered user Data
-                            FirebaseUser user = auth.getCurrentUser();
-                            assert user != null;
-                            new Database().registerUser(user.getUid(), name, email);
-                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            progressDialog.setMessage("Signing In...");
+                            auth.signInWithEmailAndPassword(email, password)
+                                    .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("result", "SignIn With Email Success");
+                                                progressDialog.dismiss();
+                                                FirebaseUser user = auth.getCurrentUser();
+                                                assert user != null;
+                                                new Database().registerUser(user.getUid(), name, email);
+                                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Log.d("result", "SigninWithEmail: Failed");
+                                                Toast.makeText(RegisterActivity.this, "Invalid username or Password", Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                            }
+                                        }
+                                    });
+
+
                         } else {
                             progressDialog.dismiss();
                             // If sign in fails, display a message to the user.

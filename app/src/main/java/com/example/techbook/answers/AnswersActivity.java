@@ -41,7 +41,7 @@ public class AnswersActivity extends AppCompatActivity {
 
         Database database = new Database();
 
-        database.getDb().collection("Questions")
+        database.getDb().collection("Questions").whereEqualTo("question", question)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
