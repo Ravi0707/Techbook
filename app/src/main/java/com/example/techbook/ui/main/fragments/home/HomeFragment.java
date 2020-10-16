@@ -73,7 +73,9 @@ public class HomeFragment extends Fragment implements QuestionsAdapter.AnswerCli
                         Collections.sort(questionDownModels, new Comparator<QuestionDownModel>() {
                             @Override
                             public int compare(QuestionDownModel o1, QuestionDownModel o2) {
-                                return o1.getTimestamp().compareTo(o2.getTimestamp());
+                                if (o1.getTimestamp() != null && o2.getTimestamp() != null)
+                                    return o1.getTimestamp().compareTo(o2.getTimestamp());
+                                else return 0;
                             }
                         });
 
