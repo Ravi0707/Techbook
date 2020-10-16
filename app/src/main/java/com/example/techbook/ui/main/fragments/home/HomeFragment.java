@@ -55,11 +55,29 @@ public class HomeFragment extends Fragment implements QuestionsAdapter.AnswerCli
 
         database = new Database();
 
+        getQuestions();
+
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireActivity(), AskQuestionActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getQuestions();
+    }
+
+    private void getQuestions() {
         database.getDb().collection("Questions")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        questionDownModels.clear();
                         for (DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())) {
                             QuestionDownModel downModel = new QuestionDownModel(
                                     documentSnapshot.getString("Uploader"),
@@ -74,7 +92,7 @@ public class HomeFragment extends Fragment implements QuestionsAdapter.AnswerCli
                             @Override
                             public int compare(QuestionDownModel o1, QuestionDownModel o2) {
                                 if (o1.getTimestamp() != null && o2.getTimestamp() != null)
-                                    return o1.getTimestamp().compareTo(o2.getTimestamp());
+                                    return o2.getTimestamp().compareTo(o1.getTimestamp());
                                 else return 0;
                             }
                         });
@@ -84,13 +102,6 @@ public class HomeFragment extends Fragment implements QuestionsAdapter.AnswerCli
                         questionsRecyclerView.setItemAnimator(new DefaultItemAnimator());
                     }
                 });
-
-        actionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(requireActivity(), AskQuestionActivity.class));
-            }
-        });
     }
 
     @Override

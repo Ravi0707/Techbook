@@ -42,8 +42,6 @@ public class AskQuestionActivity extends AppCompatActivity {
                 progressDialog.setMessage("Uploading your Question...");
                 progressDialog.show();
 
-                final String timeStamp = String.valueOf(System.currentTimeMillis());
-
                 String title = text_topic.getText().toString().trim();
                 String question = text_question.getText().toString().trim();
 

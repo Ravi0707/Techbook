@@ -16,6 +16,7 @@ import com.example.techbook.database.Database;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 
 public class WriteAnswersActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
@@ -50,22 +51,24 @@ public class WriteAnswersActivity extends AppCompatActivity {
                 if (answer.isEmpty()) {
                     Log.i("Null answer", "true " + answer);
                 } else {
-                    Task<Void> task = database.uploadAnswer(question, answer);
+                    Task<DocumentReference> task = database.uploadAnswer(question, answer);
+
                     task.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                         }
-                    }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            progressDialog.dismiss();
-                            finish();
-                            onBackPressed();
-                            Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    })
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    progressDialog.dismiss();
+                                    finish();
+                                    onBackPressed();
+                                    Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             }
         });
