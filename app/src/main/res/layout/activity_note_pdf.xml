@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".books.NotePdfActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <Toolbar
         android:id="@+id/pdfToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
