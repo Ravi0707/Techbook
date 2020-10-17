@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".answers.AnswersActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/answer_recyclerView"
         android:layout_width="match_parent"
-        tools:listitem="@layout/row_answer"
+        android:layout_height="match_parent"
         tools:itemCount="3"
-        android:layout_height="match_parent">
+        tools:listitem="@layout/row_answer">
 
     </androidx.recyclerview.widget.RecyclerView>
 
