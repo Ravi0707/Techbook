@@ -13,7 +13,7 @@
         android:background="@color/holoRed"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="XYZ" />
+        app:title="XYZ"/>
 
 
     <com.github.barteksc.pdfviewer.PDFView
