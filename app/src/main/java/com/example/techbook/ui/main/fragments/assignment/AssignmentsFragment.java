@@ -78,6 +78,8 @@ public class AssignmentsFragment extends Fragment {
         notesRecyclerView = view.findViewById(R.id.recycle);
         notesRecyclerView.setHasFixedSize(true);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        notesAdapter = new NotesAdapter(downModelArrayList);
+        notesRecyclerView.setAdapter(notesAdapter);
 
 
         database = new Database();
@@ -87,14 +89,13 @@ public class AssignmentsFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
+                        downModelArrayList.clear();
                         for (DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())) {
                             NotesDownModel downModel = new NotesDownModel(documentSnapshot.getString("Name"),
                                     documentSnapshot.getString("Url"), documentSnapshot.getString("Uploader"));
                             downModelArrayList.add(downModel);
                         }
-                        notesAdapter = new NotesAdapter(downModelArrayList);
-                        notesRecyclerView.setAdapter(notesAdapter);
+                        notesRecyclerView.getAdapter().notifyDataSetChanged();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -194,13 +195,13 @@ public class AssignmentsFragment extends Fragment {
 
                 }
             })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
         }
     }

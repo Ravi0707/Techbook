@@ -23,7 +23,7 @@ public class NotePdfActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_pdf);
 
         pdfView = findViewById(R.id.pdfView);
-        toolbar = findViewById(R.id.pdfToolbar)
+        toolbar = findViewById(R.id.pdfToolbar);
 
         bookName = getIntent().getExtras().getString(getString(R.string.book_name));
         Log.d("BOOKNAME", bookName);
