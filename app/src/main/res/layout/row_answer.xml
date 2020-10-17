@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="1dp"
-    app:contentPadding="2dp"
-    android:elevation="5dp"
-    app:cardBackgroundColor="#ffff">
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="4dp"
+    app:contentPadding="3dp"
+    app:cardBackgroundColor="#DFDEDE">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp">
 
 
         <TextView

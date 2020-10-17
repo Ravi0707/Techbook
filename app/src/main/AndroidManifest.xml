@@ -19,7 +19,6 @@
         <activity android:name=".answers.AnswersActivity" />
         <activity android:name=".ui.writeAnswer.WriteAnswersActivity" />
         <activity android:name=".ui.askQuestion.AskQuestionActivity" />
-        <activity android:name=".dashboard.DashBoardActivity" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.welcome.Welcome" />
