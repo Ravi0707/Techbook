@@ -175,11 +175,19 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d("result", "SignIn With Email Success");
                             progressDialog.dismiss();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            if (auth.getCurrentUser().isEmailVerified()) {
+                                Log.d("result", "SignIn With Email Success");
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                auth.getCurrentUser().sendEmailVerification();
+                                auth.signOut();
+                                Toast.makeText(LoginActivity.this, "Verify Email before logging in.", Toast.LENGTH_LONG).show();
+                            }
+
+
                         } else {
                             Log.d("result", "SigninWithEmail: Failed");
                             Toast.makeText(LoginActivity.this, "Invalid username or Password", Toast.LENGTH_SHORT).show();
