@@ -29,7 +29,7 @@
         android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:paddingBottom="5dp"
-        android:text="Solve Explore Innovate"
+        android:text="Let's Ask"
         android:textColor="#000000"
         android:textSize="40dp"
         android:textStyle="bold"
